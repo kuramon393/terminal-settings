@@ -1,10 +1,14 @@
 SHELL=/bin/bash
 
+setting := /mnt/c/users/yuki/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
+copy_setting:
+	cp ${setting} ./
+
 day := `date +"%Y_%m_%d"`
 m := autopush ${day}
 branch := origin master
 autopush: ## This is auto push module, need commit message(default=autopush)
-	
+	make copy_setting
 	git add .
 	git commit -m "${m}"
 	git push ${branch}
